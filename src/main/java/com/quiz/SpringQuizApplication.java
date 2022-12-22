@@ -1,16 +1,34 @@
 package com.quiz;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+
+@MapperScan(basePackages = "com.quiz.*") // interface(mapper)가 있는 패키지 경로
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+// @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class SpringQuizApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringQuizApplication.class, args);
 	}
+	
+	@Bean
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource);
+
+        Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*Mapper.xml");
+        sessionFactory.setMapperLocations(res);
+
+        return sessionFactory.getObject();
+    }
 
 }
