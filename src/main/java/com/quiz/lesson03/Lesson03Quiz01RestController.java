@@ -11,7 +11,7 @@ import com.quiz.lesson03.bo.RealEstateBO;
 import com.quiz.lesson03.model.RealEstate;
 
 @RequestMapping("/lesson03/quiz01")
-@RestController
+@RestController  // @Controller + @ ResponseBody
 public class Lesson03Quiz01RestController {
 	
 	@Autowired
