@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,21 +15,21 @@
 <body>
 	<div class="container">
 		<h1>판매자 추가</h1>
-		<form method="post" action="/lesson04/quiz01/add_seller">
+		<form method="post" action="/lesson04/quiz01/addSeller">
 			<div class="form-group">
-				<label for="name">닉네임</label>
-				<input type="text" id="name" name="name" class="form-control">
+				<label for="nickname">닉네임</label>
+				<input type="text" id="nickname" name="nickname" class="form-control col-3">
 			</div>
 			<div class="form-group">
-				<label for="url">프로필 사진 url</label>
-				<input type="text" id="url" name="url" class="form-control">
+				<label for="profileImageUrl">프로필 사진 url</label>
+				<input type="text" id="profileImageUrl" name="profileImageUrl" class="form-control">
 			</div>
 			<div class="form-group">
-				<label for="temperture">온도</label>
-				<input type="text" id="temperture" name="temperture" class="form-control">
+				<label for="temperature">온도</label>
+				<input type="text" id="temperature" name="temperature" class="form-control col-3">
 			</div>
 			<input type="submit" class="btn btn-primary" value="추가">
 		</form>
 	</div>
 </body>
-</html> --%>
+</html>
