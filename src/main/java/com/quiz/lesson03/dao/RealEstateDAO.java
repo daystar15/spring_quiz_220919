@@ -24,10 +24,18 @@ public interface RealEstateDAO {
 	public int insertRealEstate(RealEstate realEstate);
 	
 	public int insertRealEstateAsField(
+			// map - mapper의 parameterType이 map
 			@Param("realtorId") int realtorId, 
 			@Param("address") String address, 
 			@Param("area") int area, 
 			@Param("type") String type, 
 			@Param("price") int price, 
 			@Param("rentPrice") Integer rentPrice);
+	
+	public int updateRealEstateById(
+			@Param("id") int id, 
+			@Param("type") String type, 
+			@Param("price") int price);
+	
+	public void deleteRealEstateById(int id);
 }
