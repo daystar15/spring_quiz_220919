@@ -15,7 +15,8 @@
 <body>
 	<div class="container">
 		<h1>판매자 추가</h1>
-		<form method="post" action="/lesson04/quiz01/addSeller">
+		<form method="post" action="/lesson04/quiz01/addSeller"> 
+		<!-- action에서 넘어가는 건 view화면이 아니라 저장되는 것, 절대경로로 지정하기 -->
 			<div class="form-group">
 				<label for="nickname">닉네임</label>
 				<input type="text" id="nickname" name="nickname" class="form-control col-3">
