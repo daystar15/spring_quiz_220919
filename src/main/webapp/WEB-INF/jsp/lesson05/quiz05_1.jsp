@@ -35,25 +35,43 @@
 			</header>
 			<section class="contents col-9">
 				<div class="inner">
-					<h2 class="font-weight-bold">과거 날씨</h2>
-					<table class="table text-center">
-						<thead>
-							<th>날짜</th>
-							<th>날씨</th>
-							<th>기온</th>
-							<th>강수량</th>
-							<th>미세먼지</th>
-							<th>풍속</th>
-						</thead>
-						<tbody>
-							<td></td>
-							<td><img src="" alt="날씨"></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tbody>
-					</table>
+					<h2 class="font-weight-bold">날씨 입력</h2>
+					<form method="post" action="/lesson05/quiz05_weather">
+						<div class="form-group">
+							<label for="date">날짜</label>
+							<input type="text" id="date" name="date" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="weather">날씨</label>
+							<select id="weather" name="weather" class="form-control">
+								<option>맑음</option>
+								<option>흐림</option>
+								<option>비</option>
+								<option>눈</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="microDust">날씨</label>
+							<select id="microDust" name="microDust" class="form-control">
+								<option>좋음</option>
+								<option>보통</option>
+								<option>나쁨</option>
+								<option>최악</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="temperatures">기온</label>
+							<input type="text" id="temperatures" name="temperatures" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="precipitation">강수량</label>
+							<input type="text" id="precipitation" name="precipitation" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for="windSpeed">풍속</label>
+							<input type="text" id="windSpeed" name="windSpeed" class="form-control">
+						</div>
+					</form>
 				</div>
 			</section>
 		</div>
