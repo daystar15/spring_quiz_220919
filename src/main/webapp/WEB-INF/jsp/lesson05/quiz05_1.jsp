@@ -7,12 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>기상청</title>
+  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
   <!-- bootstrap CDN link -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="/css/lesson05/style.css">
+  
+   <!-- datepicker 라이브러리 -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <!-- main.js -->
+  <script src="/js/lesson05/main.js"></script>
 </head>
 <body>
 	<div id="wrap">
@@ -37,13 +44,15 @@
 				<div class="inner">
 					<h2 class="font-weight-bold">날씨 입력</h2>
 					<form method="post" action="/lesson05/add_weather">
-						<div class="d-flex">
+						<div class="d-flex justify-content-around align-items-center">
 							<div class="form-group d-flex align-items-center mr-3">
-								<label for="date">날짜</label>
-								<input type="text" id="date" name="date" class="form-control w-50">
+								<label for="date" class="d-flex align-items-center">
+									<span class="dateBox mr-3">날짜</span>
+									<input type="text" id="datepicker" name="date" class="form-control">
+								</label>
 							</div>
-							<div class="form-group d-flex align-items-center mr-3">
-								<label for="weather">날씨</label>
+							<div class="form-group d-flex align-items-center mr-3 justify-content-between">
+								<label for="weather" class="tit">날씨</label>
 								<select id="weather" name="weather" class="form-control">
 									<option>맑음</option>
 									<option>흐림</option>
@@ -52,7 +61,7 @@
 								</select>
 							</div>
 							<div class="form-group d-flex align-items-center">
-								<label for="microDust" class="microDust">미세먼지</label>
+								<label for="microDust" class="microDust tit">미세먼지</label>
 								<select id="microDust" name="microDust" class="form-control">
 									<option>좋음</option>
 									<option>보통</option>
@@ -63,7 +72,7 @@
 						</div>
 						<div class="d-flex justify-content-between">
 							<div class="form-group d-flex align-items-center mr-3">
-								<label for="temperatures" class="w-25">기온</label>
+								<label for="temperatures" class="w-25 tit">기온</label>
 								<div class="input-group">
 									<input type="text" id="temperatures" name="temperatures" class="form-control">
 									<div class="input-group-append">
@@ -72,7 +81,7 @@
 								</div>
 							</div>
 							<div class="form-group d-flex align-items-center mr-3">
-								<label for="precipitation">강수량</label>
+								<label for="precipitation" class="tit">강수량</label>
 								<div class="input-group">
 									<input type="text" id="precipitation" name="precipitation" class="form-control">
 									<div class="input-group-append">
@@ -81,7 +90,7 @@
 								</div>
 							</div>
 							<div class="form-group d-flex align-items-center">
-								<label for="windSpeed" class="w-25">풍속</label>
+								<label for="windSpeed" class="w-25 tit">풍속</label>
 								<div class="input-group">
 									<input type="text" id="windSpeed" name="windSpeed" class="form-control">
 									<div class="input-group-append">

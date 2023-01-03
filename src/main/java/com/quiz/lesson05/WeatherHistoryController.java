@@ -51,7 +51,7 @@ public class WeatherHistoryController {
 		
 		weatherhistoryBO.addWeatherHistoryList(date, weather, temperatures, precipitation, microDust, windSpeed);
 		
-		return "lesson05/quiz05";
+		return "redirect:/lesson05/weather_history_view";
 	}
 	
 }
