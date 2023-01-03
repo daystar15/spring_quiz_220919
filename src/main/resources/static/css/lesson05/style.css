@@ -45,3 +45,9 @@ footer .inner .footerLogo {
 footer .inner p {
 	margin-bottom: -1px;
 }
+label {
+	width: 100px;
+}
+label.microDust {
+	width: 120px;
+}

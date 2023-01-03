@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
@@ -19,15 +20,15 @@
 		<div class="d-flex">
 			<header class="col-3 pl-0 pr-0">
 				<h1 class="logo">
-					<a href="/lesson05/quiz05.jsp">
+					<a href="#">
 						<img src="/img/lesson05/logo.png" alt="기상청 로고" width="50px">
-					기상청
+						기상청
 					</a>
 				</h1>
 				<nav>
 					<ul class="main-menu">
 						<li><a href="#">날씨</a></li>
-						<li><a href="#">날씨입력</a></li>
+						<li><a href="/lesson05/add_weather_view">날씨입력</a></li>
 						<li><a href="#">테마날씨</a></li>
 						<li><a href="#">관측 기후</a></li>
 					</ul>
@@ -38,20 +39,41 @@
 					<h2 class="font-weight-bold">과거 날씨</h2>
 					<table class="table text-center">
 						<thead>
-							<th>날짜</th>
-							<th>날씨</th>
-							<th>기온</th>
-							<th>강수량</th>
-							<th>미세먼지</th>
-							<th>풍속</th>
+							<tr>
+								<th>날짜</th>
+								<th>날씨</th>
+								<th>기온</th>
+								<th>강수량</th>
+								<th>미세먼지</th>
+								<th>풍속</th>
+							</tr>
 						</thead>
 						<tbody>
-							<td></td>
-							<td><img src="" alt="날씨"></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<c:forEach items="${list}" var="list">
+								<tr>
+									<td>
+										<fmt:formatDate value="${list.date}" pattern="yyyy년 MM월 dd일" />
+									</td>
+									<td>
+										<c:if test="${list.weather eq '맑음'}">
+											<img src="/img/lesson05/sunny.jpg" alt="날씨">
+										</c:if>
+										<c:if test="${list.weather eq '비'}">
+											<img src="/img/lesson05/rainy.jpg" alt="날씨">
+										</c:if>
+										<c:if test="${list.weather eq '흐림'}">
+											<img src="/img/lesson05/cloudy.jpg" alt="날씨">
+										</c:if>
+										<c:if test="${list.weather eq '구름조금'}">
+											<img src="/img/lesson05/partlyCloudy.jpg" alt="날씨">
+										</c:if>
+									</td>
+									<td>${list.temperatures}℃</td>
+									<td>${list.precipitation}mm</td>
+									<td>${list.microDust}</td>
+									<td>${list.windSpeed}km/h</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
