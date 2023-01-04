@@ -31,6 +31,7 @@
 	<script>
 		$(document).ready(function(){
 			$("#go").on("click", function() {
+				// validation
 				let name = $("#name").val().trim();
 				if (name < 1) {
 					alert("제목을 입력하세요");
@@ -55,14 +56,13 @@
 					
 					// Response
 					, success:function(data) {
-						location.href="/lesson06/quiz01_1"
+						location.href = "/lesson06/quiz01/after_add_favorite_view"
 					}
 					, error:function(e) {
 						alert("에러")
 					}
-				})
-			})
-			
+				});
+			});
 			
 		});
 	</script>
