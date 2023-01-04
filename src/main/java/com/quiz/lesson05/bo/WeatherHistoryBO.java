@@ -19,7 +19,7 @@ public class WeatherHistoryBO {
 		return weatherhistoryDAO.selectWeatherHistoryList();
 	}
 	
-	public void addWeatherHistoryList(
+	public void addWeatherHistoryList( // insert되면 아무것도 돌려받지 않기 때문에 void로 만든다.
 			Date date,
 			String weather,
 			double temperatures,
