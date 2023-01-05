@@ -29,7 +29,7 @@
 			<tbody>
 				<c:forEach var="site" items="${list}" varStatus="status">
 					<tr>
-						<td>${status.count}</td>
+						<td>${status.count}</td> <!-- ${site.id}도 가능하다. -->
 						<td>${site.name}</td>
 						<td>${site.url}</td>
 					</tr>

@@ -23,47 +23,90 @@
 			</div>
 			<div class="mb-3">
 				<lable for="url">주소</lable>
-				<input type="text" id="url" name="url" class="form-control">
+				<div class="d-flex">
+					<input type="text" id="url" name="url" class="form-control">
+					<input type="button" value="중복 확인" class="btn btn-info" id="urlCheckBtn">
+				</div>
+				<small id="urlStatusArea"></small>
 			</div>
 			<input type="button" value="추가" class="btn btn-success w-100" id="go">
 		</div>
 	</div>
 	<script>
 		$(document).ready(function(){
+			let name = $("#name").val().trim();
+			let url = $("#url").val().trim();
+			
+			// 중복확인 버튼 클릭
+			$("#urlCheckBtn").on("click", function(){
+				// 초기화
+				$("#urlStatusArea").empty();
+				console.log(url);
+				// url 중복 확인
+				$.ajax({
+					// request
+					type:"POST"
+					, url: "/lesson06/quiz02/is_duplication"
+					, data: {"url":url}
+				
+					// reponse
+					// 0일 때 중복아님 = false / true면 중복
+					, success:function(data) {
+						alert(data.is_duplication);
+						/* if (!data.is_duplication) {
+							$("#urlStatusArea").append('<span class="text-danger">중복된 url입니다.</span>');
+						} 
+						if (data.is_duplication == true){
+							$("#urlStatusArea").append('<span class="text-danger">저장가능한 url입니다.</span>');
+						} */
+					}
+					, error:function(e) {
+						alert("실패" + e)
+					}
+				});
+			})
+			
 			$("#go").on("click", function() {
 				// validation
-				let name = $("#name").val().trim();
 				if (name < 1) {
 					alert("제목을 입력하세요");
 					return;
 				}
 				
-				let url = $("#url").val().trim();
 				if (url < 1) {
 					alert("주소를 입력하세요");
 					return;
 				}
 				
+				// http로 시작하지도 않고, https로 시작하지도 않으면 alert
+				if (url.startsWith('http') == false && url.startsWith('https') == false) {
+					alert("주소 형식이 잘못되었습니다.");
+					return;
+				}
+				
+				// 데이터 확인
 				console.log(name);
 				console.log(url);
 				
-				// AJAX
+				// AJAX 통신
 				$.ajax({
 					// Request
-					type: "POST"
+					type: "POST" // 메소드를 무엇으로 할지
 					, url: "/lesson06/quiz01/add_favorite" // form의 action 주소
 					, data: {"name": name, "url": url}
 					
 					// Response
-					, success:function(data) {
-						location.href = "/lesson06/quiz01/after_add_favorite_view"
+					, success:function(data) {  // string json => object
+						// alert(data); // Object Object
+						if (data.result == "성공") {
+							location.href = "/lesson06/quiz01/after_add_favorite_view"
+						}
 					}
 					, error:function(e) {
-						alert("에러")
+						alert("에러" + e);
 					}
 				});
 			});
-			
 		});
 	</script>
 </body>
