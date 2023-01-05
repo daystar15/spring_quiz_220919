@@ -41,7 +41,6 @@
 			$("#urlCheckBtn").on("click", function(){
 				// 초기화
 				$("#urlStatusArea").empty();
-				console.log(url);
 				// url 중복 확인
 				$.ajax({
 					// request
