@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,5 +72,17 @@ public class Lesson06Controller {
 		model.addAttribute("list", list);
 		
 		return "lesson06/quiz01_1";
+	}
+	
+	// 즐겨 찾기 목록 삭제 - AJAX
+	// http://localhost:8080/lesson06/quiz02/after_delete_favorite
+	@ResponseBody
+	@DeleteMapping("/quiz02/after_delete_favorite")
+	public String afterDeleteFavorite(
+			@RequestParam("id") int id) {
+		
+		favoriteBO.deleteFavoriteById(id);
+		
+		return "성공";
 	}
 }

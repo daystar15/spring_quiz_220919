@@ -34,11 +34,11 @@
 	</div>
 	<script>
 		$(document).ready(function(){
-			let name = $("#name").val().trim();
-			let url = $("#url").val().trim();
 			
 			// 중복확인 버튼 클릭
 			$("#urlCheckBtn").on("click", function(){
+
+				let url = $("#url").val().trim();
 				// 초기화
 				$("#urlStatusArea").empty();
 				// url 중복 확인
@@ -52,12 +52,12 @@
 					// 0일 때 중복아님 = false / true면 중복
 					, success:function(data) {
 						alert(data.is_duplication);
-						/* if (!data.is_duplication) {
+						if (data.is_duplication) {
 							$("#urlStatusArea").append('<span class="text-danger">중복된 url입니다.</span>');
 						} 
-						if (data.is_duplication == true){
+						if (!data.is_duplication){
 							$("#urlStatusArea").append('<span class="text-danger">저장가능한 url입니다.</span>');
-						} */
+						}
 					}
 					, error:function(e) {
 						alert("실패" + e)
@@ -67,11 +67,13 @@
 			
 			$("#go").on("click", function() {
 				// validation
+				let name = $("#name").val().trim();
 				if (name < 1) {
 					alert("제목을 입력하세요");
 					return;
 				}
-				
+
+				let url = $("#url").val().trim();
 				if (url < 1) {
 					alert("주소를 입력하세요");
 					return;

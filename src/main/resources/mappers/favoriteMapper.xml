@@ -32,7 +32,7 @@
 			`favorite`
  	</select>
  	
- 	<select id="existFavoriteByUrl" parameterType="String" resultType="boolean">
+ 	<select id="existFavoriteByUrl" parameterType="string" resultType="boolean">
  		SELECT
  			COUNT(1)
  		FROM
@@ -40,5 +40,12 @@
 		WHERE
 			`url` = #{url}
  	</select>
+ 	
+ 	<delete id="deleteFavoriteById" parameterType="int">
+ 		DELETE
+ 		FROM `favorite`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
  
  </mapper>

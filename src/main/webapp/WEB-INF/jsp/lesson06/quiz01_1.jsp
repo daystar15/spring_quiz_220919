@@ -24,6 +24,7 @@
 					<th>No.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,10 +33,37 @@
 						<td>${status.count}</td> <!-- ${site.id}도 가능하다. -->
 						<td>${site.name}</td>
 						<td>${site.url}</td>
+						<td>
+							<input type="button" class="btn btn-danger" id="deleteBtn" value="삭제">
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	<script>
+		$(document).ready(function(){
+			$("#deleteBtn").on("click", function(){
+				alert("ㅇㅇ");
+				/* $.ajax({
+					// request
+					type:"delete"
+					, url:"/lesson06/quiz02/after_delete_favorite"
+					, data: {"id": id}
+				
+					// response
+					, success:function(data) {
+						alert(data);
+						/* if (data == '성공') {
+							location.reload();
+						}
+					}
+					, error:function(e) {
+						alert("에러")
+					}
+				}); */
+			})
+		});
+	</script>
 </body>
 </html>
