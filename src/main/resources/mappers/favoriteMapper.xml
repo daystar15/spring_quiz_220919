@@ -41,6 +41,26 @@
 			`url` = #{url}
  	</select>
  	
+ 	<select id="selectFavoriteByUrl" parameterType="String" resultType="com.quiz.lesson06.model.Favorite">
+ 		SELECT
+ 			`id`
+			,`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`favorite`
+		WHERE
+			`url` = #{url}
+ 	</select>
+ 	
+ 	<delete id="deleteFavoriteByIds" parameterType="int">
+ 		DELETE
+ 		FROM `favorite`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>	
+ 	
  	<delete id="deleteFavoriteById" parameterType="int">
  		DELETE
  		FROM `favorite`

@@ -26,6 +26,24 @@ public class FavoriteBO {
 		return favoriteDAO.existFavoriteByUrl(url);
 	}
 	
+	// return을 list<favorite>로 받아 저장한다.
+	public Favorite getFavoriteByUrl(String url) {
+		return favoriteDAO.selectFavoriteByUrl(url);
+		// 0 1   []
+		/*
+		 * List<Favorite> favoriteList = favoriteDAO.selectFavoriteByUrl(url); if
+		 * (favoriteList.isEmpty() == false) { // 리스트가 채워져 있을 때 return
+		 * favoriteList.get(0); }
+		 * 
+		 * // 비어있는 경우 return null;
+		 */
+	}
+	
+	public int deleteFavoriteByIds(int id) {
+		return favoriteDAO.deleteFavoriteByIds(id);
+	}
+	
+	// 내가 한것
 	public void deleteFavoriteById(int id) {
 		favoriteDAO.deleteFavoriteById(id);
 	}

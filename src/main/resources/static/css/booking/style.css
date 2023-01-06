@@ -1,0 +1,52 @@
+@charset "UTF-8";
+a, a:hover {
+	text-decoration: none;
+}
+.logo {
+	padding: 20px 0;
+}
+.logo a {
+	color: #222;
+}
+nav {
+    background: peru;
+}
+nav ul li a {
+	color: #fff;
+}
+nav ul li a:hover {
+	color: #fff;
+    background: burlywood;
+}
+.mainBanner img {
+	width: 100%;
+}
+.reserBox .inner {
+	width: 95%;
+	margin: auto;
+}
+.reserBox label {
+	width: 40%;
+}
+.mainBox .nowReser,
+.mainBox .callBox,
+.mainBox .reserBox {
+    background: sienna;
+    color: #fff;
+}
+.mainBox .callBox a {
+	color: #fff;
+}
+.mainBox .reserBox {
+    background: chocolate;
+}
+.mainBox .reserBox .findBtn {
+	float: right;
+}
+footer {
+	padding: 15px 0;
+	font-size: 14px;
+}
+footer p {
+	margin: 3px 0;
+}

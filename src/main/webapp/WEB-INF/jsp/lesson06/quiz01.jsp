@@ -23,11 +23,13 @@
 			</div>
 			<div class="mb-3">
 				<lable for="url">주소</lable>
-				<div class="d-flex">
+				<div class="d-flex"> <!-- form-inline이라는 클래스도 똑같은 역할 -->
 					<input type="text" id="url" name="url" class="form-control">
 					<input type="button" value="중복 확인" class="btn btn-info" id="urlCheckBtn">
 				</div>
 				<small id="urlStatusArea"></small>
+				<!-- <small id="duplicationText" class="text-danger d-none">중복된 URL입니다.</small> -->
+				<!-- <small id="avaliableText" class="text-success d-none">저장가능한 URL입니다.</small> -->
 			</div>
 			<input type="button" value="추가" class="btn btn-success w-100" id="go">
 		</div>
@@ -35,16 +37,18 @@
 	<script>
 		$(document).ready(function(){
 			
-			// 중복확인 버튼 클릭
+			// 중복확인 버튼 클릭 - 여기서 validation check를 해도 된다.
 			$("#urlCheckBtn").on("click", function(){
-
+				// url
 				let url = $("#url").val().trim();
+				
 				// 초기화
 				$("#urlStatusArea").empty();
+				
 				// url 중복 확인
 				$.ajax({
 					// request
-					type:"POST"
+					type:"POST" // GET방식은 크기의 한계가 있다.
 					, url: "/lesson06/quiz02/is_duplication"
 					, data: {"url":url}
 				
@@ -52,11 +56,17 @@
 					// 0일 때 중복아님 = false / true면 중복
 					, success:function(data) {
 						alert(data.is_duplication);
+						// 중복 
 						if (data.is_duplication) {
 							$("#urlStatusArea").append('<span class="text-danger">중복된 url입니다.</span>');
+							// $("avaliableText").addClass("d-none");
+							// $("#duplicationText").removeClass("d-none");
 						} 
+						// 중복 아님
 						if (!data.is_duplication){
-							$("#urlStatusArea").append('<span class="text-danger">저장가능한 url입니다.</span>');
+							$("#urlStatusArea").append('<span class="text-success">저장가능한 url입니다.</span>');
+							// $("#duplicationText").addClass("d-none");
+							// $("avaliableText").removeClass("d-none");
 						}
 					}
 					, error:function(e) {

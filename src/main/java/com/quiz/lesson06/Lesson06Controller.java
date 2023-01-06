@@ -49,13 +49,22 @@ public class Lesson06Controller {
 		return result;  // jackson라이브러리가 동작해서 JSON(String)이 된다
 	}
 	
-	// AJAX - url 중복 확인
+	// AJAX - url 중복 확인, Model 객체를 쓸 수 없다.
 	@ResponseBody
 	@PostMapping("/quiz02/is_duplication")
 	public Map<String, Boolean> isDuplication(
 			@RequestParam("url") String url) {
 		
 		Map<String, Boolean> duplMap = new HashMap<>();
+		// 중복확인 select
+		// 아래와 같은 쿼리는 재활용이 가능해서 좋다.
+		/* 만약 데이터에 중복이 있으면 에러가 난다. 하나의 객체에 담을 수가 없기 때문에(too many result) 
+		   해결) list로 받아야함
+		 * Favorite favorite = favoriteBO.getFavoriteByUrl(url); 
+		 * if (favorite != null) {
+		 * // 중복 duplMap.put("is_duplication", true); } else {
+		 * duplMap.put("is_duplication", false); }
+		 */
 		duplMap.put("is_duplication", favoriteBO.existFavoriteByUrl(url));
 		
 		return duplMap;
@@ -74,8 +83,32 @@ public class Lesson06Controller {
 		return "lesson06/quiz01_1";
 	}
 	
+	// 선생님 풀이
+	// AJAX 요청
+	// http://localhost:8080/lesson06/quiz02/delete_favorite
+	@ResponseBody
+	@DeleteMapping("/quiz02/delete_favorite")
+	public Map<String, Object> deleteFavorite(
+			@RequestParam("id") int id) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		// db delete, 정의하는 것은 서버개발자 재량껏, 클라이언트가 서버가 어떻게 작동되었는지 알 수있다.
+		int row = favoriteBO.deleteFavoriteByIds(id);
+		if (row > 0) {
+			result.put("code", 1); // 성공
+			result.put("result", "성공");
+		} else {
+			result.put("code", 500); // 실패
+			result.put("result", "실패");
+			result.put("error_message", "삭제된 행이 없습니다.");
+		}
+		
+		return result;
+	}
+	
+	// 내가 한 것
 	// 즐겨 찾기 목록 삭제 - AJAX
-	// http://localhost:8080/lesson06/quiz02/after_delete_favorite
 	@ResponseBody
 	@DeleteMapping("/quiz02/after_delete_favorite")
 	public String afterDeleteFavorite(
