@@ -51,7 +51,7 @@
         <div class="reserBox col-4 pt-3 pb-3">
           <div class="inner">
           	<h4>예약확인</h4>
-          	<div class="form-group d-flex align-items-center">
+          	<div class="form-group d-flex align-items-center mt-3">
 	            <label for="name">이름:</label>
 	            <input type="text" name="name" id="name" class="form-control">
 	          </div>
@@ -78,5 +78,37 @@
       <p>Copyright 2025 tongnamu All right reserved</p>
     </footer>
   </div>
+  
+  <script>
+  	$(document).ready(function() {
+  		$(".findBtn").on("click", function() {
+  			let name = $("#name").val().trim();
+  			if (name == '') {
+  				alert("예약시 작성한 이름을 입력해주세요.");
+  				return;
+  			} 
+  				
+  			let phoneNumber = $("#phoneNumber").val().trim();
+  			if (phoneNumber == '') {
+  				alert("예약시 작성한 휴대폰번호를 입력해주세요.");
+  				return;
+  			}
+  			$.ajax({
+  				type: "post"
+  				, url: "/booking/reservation_serch"
+  				, data: {"name":name, "phoneNumber":phoneNumber}
+  			
+  				, success:function(data) {
+  					if (name.name == name && phoneNumber.phoneNumber == phoneNumber) {
+  	  					alert("이름 : name\n 날짜 : result.date\n 일수 : result.day\n 인원 : result.headcount\n 상태 : result.state\n ");
+  					}
+  				}
+  				, error:function(e) {
+  					alert("실패 " + e);
+  				}
+  			})
+  		})
+  	})
+  </script>
 </body>
 </html>

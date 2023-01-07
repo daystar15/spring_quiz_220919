@@ -50,3 +50,12 @@ footer {
 footer p {
 	margin: 3px 0;
 }
+/* 예약 하기 페이지 */
+.reserForm {
+	width: 60%;
+	margin: auto;
+}
+/* 예약 목록 페이지 */
+.viewList tbody tr td {
+	vertical-align: middle !important;
+}
