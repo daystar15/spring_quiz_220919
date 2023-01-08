@@ -49,7 +49,7 @@
  			`id` = #{id}
  	</delete>
  	
- 	<select id="getBookingList" parameterType="String" resultType="map">
+ 	<select id="getBookingList" parameterType="map" resultType="com.quiz.lesson06.model.Booking">
  		SELECT
  			`id`
 			, `name`

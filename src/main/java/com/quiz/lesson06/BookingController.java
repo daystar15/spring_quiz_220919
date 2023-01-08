@@ -1,5 +1,7 @@
 package com.quiz.lesson06;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,7 +27,11 @@ import com.quiz.lesson06.model.Booking;
 public class BookingController {
 	
 	@Autowired
-	private BookingBO bookingBO;	
+	private BookingBO bookingBO;
+	private Date date;
+	private int day;
+	private int headcount;
+	private String state;	
 
 	// 예약 목록 보기
 	// http://localhost:8080/booking/booking_list_view
@@ -92,15 +98,46 @@ public class BookingController {
 	
 	// 메인화면 - 예약 조회(AJAX)
 	@ResponseBody
-	@PostMapping("/reservation_serch")
-	public Map<String, String> reservationSearch(
+	@PostMapping("/reservation_search")
+	public Map<String, Object> reservationSearch(
 			@RequestParam("name") String name,
+			@DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
 			@RequestParam("phoneNumber") String phoneNumber,
-			Model model) {
+			@RequestParam(value="day", required=false, defaultValue="0") Integer day,
+			@RequestParam(value="headcount", required=false, defaultValue="0") Integer headcount,
+			@RequestParam(value="state", required=false) String state
+			) {
 		
-		Map<String, String> result = bookingBO.getBookingList(name, phoneNumber);
-		model.addAttribute("name", name);
-		model.addAttribute("phoneNumber", phoneNumber);
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> person = new HashMap<>();
+		
+		// BO에서 정보 select
+		Booking booking = bookingBO.getBookingList(name, date, day, headcount, phoneNumber, state);
+		
+		// 예약확인 정보
+		String whatName = booking.getName();
+		String whatPhoneNumber = booking.getPhoneNumber();
+		int whatDay = booking.getDay();
+		int whatHeadcount = booking.getHeadcount();
+		String whatState = booking.getState();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date whatsDate = booking.getDate();
+		String whatDate = dateFormat.format(whatsDate);
+
+		result.put("findOk", "성공");
+		result.put("day", whatDay);
+		result.put("headcount", whatHeadcount);
+		result.put("state", whatState);
+		result.put("date", whatDate);
+		
+		//if (name == whatName) {
+		//	if (phoneNumber == whatPhoneNumber) {
+		//		
+		//	}
+		//} else {
+		//	result.put("findOk", "재확인");
+		//}
+		
 		
 		return result;
 		

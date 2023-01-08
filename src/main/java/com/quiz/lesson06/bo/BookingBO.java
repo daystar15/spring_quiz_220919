@@ -28,8 +28,7 @@ public class BookingBO {
 		return bookingDAO.deleteBookingList(id);
 	}
 	
-	public Map<String, String> getBookingList(String name, String phoneNumber) {
-		Map<String, String> map = bookingDAO.getBookingList(name, phoneNumber);
-		return map;
+	public Booking getBookingList(String name, Date date, int day, int headcount, String phoneNumber, String state) {
+		return bookingDAO.getBookingList(name, date, day, headcount, state, phoneNumber);
 	}
 }

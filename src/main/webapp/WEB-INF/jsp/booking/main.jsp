@@ -17,7 +17,8 @@
 	<link rel="stylesheet" href="/css/booking/style.css">
 	
 	<!-- js -->
-	<script src=""></script>
+	
+	<!-- <script src="/js/booking/main.js"></script> -->
 </head>
 <body>
   <div class="container">
@@ -35,11 +36,8 @@
       </ul>
     </nav>
     <div class="contents">
-      <div class="mainBanner">
-        <img src="/img/booking/test06_banner1.jpg" alt="통나무 팬션 배너1">
-        <!-- <img src="/img/booking/test06_banner2.jpg" alt="통나무 팬션 배너2">
-        <img src="/img/booking/test06_banner3.jpg" alt="통나무 팬션 배너3">
-        <img src="/img/booking/test06_banner4.jpg" alt="통나무 팬션 배너4"> -->
+      <div class="mainBanner d-flex">
+        <img src="/img/booking/test06_banner1.jpg" id="bannerImg" alt="통나무 팬션 배너1">
       </div>
       <div class="mainBox d-flex">
         <div class="nowReser col-4 d-flex align-items-center justify-content-center">
@@ -95,13 +93,20 @@
   			}
   			$.ajax({
   				type: "post"
-  				, url: "/booking/reservation_serch"
+  				, url: "/booking/reservation_search"
   				, data: {"name":name, "phoneNumber":phoneNumber}
   			
   				, success:function(data) {
-  					if (name.name == name && phoneNumber.phoneNumber == phoneNumber) {
-  	  					alert("이름 : name\n 날짜 : result.date\n 일수 : result.day\n 인원 : result.headcount\n 상태 : result.state\n ");
-  					}
+  	  				if (data.findOk == "성공") {
+	  	  				alert("이름 : " + name +
+  							"\n날짜 : " + data.date + 
+  							"\n일수 : " + data.day + 
+  							"\n인원 : " + data.headcount  + 
+  							"\n상태 : " + data.state
+  							);
+  	  				} else if (data.findOk == "재확인") {
+  	  					alert("예약 내용이 없습니다.");
+  	  				}
   				}
   				, error:function(e) {
   					alert("실패 " + e);

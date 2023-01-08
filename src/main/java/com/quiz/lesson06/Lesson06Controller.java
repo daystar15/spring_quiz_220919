@@ -62,7 +62,8 @@ public class Lesson06Controller {
 		   해결) list로 받아야함
 		 * Favorite favorite = favoriteBO.getFavoriteByUrl(url); 
 		 * if (favorite != null) {
-		 * // 중복 duplMap.put("is_duplication", true); } else {
+		 * // 중복 duplMap.put("is_duplication", true); } 
+		 * else {
 		 * duplMap.put("is_duplication", false); }
 		 */
 		duplMap.put("is_duplication", favoriteBO.existFavoriteByUrl(url));

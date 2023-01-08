@@ -23,8 +23,12 @@ public interface BookingDAO {
 	
 	public int deleteBookingList(int id);
 	
-	public Map<String, String> getBookingList(
+	public Booking getBookingList(
 			@Param("name") String name, 
+			@Param("date") Date date, 
+			@Param("day") int day, 
+			@Param("headcount") int headcount, 
+			@Param("state") String state,
 			@Param("phoneNumber") String phoneNumber);
 	
 }
