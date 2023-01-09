@@ -43,25 +43,25 @@
 	    </nav>
 	    <div class="contents pt-5 pb-5">
 	    	<div class="reserForm">
-	    		<h2>예약 하기</h2>
+	    		<h2 class="mb-5">예약 하기</h2>
 	    		<div class="form-group">
-	    			<label for="name">이름</label>
+	    			<label for="name" class="font-weight-bold">이름</label>
 	    			<input type="text" id="name" name="name" class="form-control">
 	    		</div>
 	    		<div class="form-group">
-	    			<label for="date">예약날짜</label>
+	    			<label for="date" class="font-weight-bold">예약날짜</label>
 	    			<input type="text" id="date" name="date" class="form-control">
 	    		</div>
 	    		<div class="form-group">
-	    			<label for="day">숙박일수</label>
+	    			<label for="day" class="font-weight-bold">숙박일수</label>
 	    			<input type="text" id="day" name="day" class="form-control">
 	    		</div>
 	    		<div class="form-group">
-	    			<label for="headcount">숙박인원</label>
+	    			<label for="headcount" class="font-weight-bold">숙박인원</label>
 	    			<input type="text" id="headcount" name="headcount" class="form-control">
 	    		</div>
 	    		<div class="form-group">
-	    			<label for="phoneNumber">전화번호</label>
+	    			<label for="phoneNumber" class="font-weight-bold">전화번호</label>
 	    			<input type="text" id="phoneNumber" name="phoneNumber" class="form-control">
 	    		</div>
 	    		<button type="button" class="btn btn-warning w-100" id="reserBtn">예약하기</button>
@@ -78,10 +78,13 @@
 		$(document).ready(function() {
 			$("#date").datepicker({
 				dateFormat: "yy-mm-dd"
-			})
+				, minDate: 0 // 오늘부터 그 뒤 선택
+			});
 			
+			// 예약하기 버튼
 			$("#reserBtn").on("click", function() {
-				let name = $("#name").val();
+				// validation
+				let name = $("#name").val().trim();
 				if (name == '') {
 					alert("이름을 입력해주세요.");
 					return;
@@ -93,19 +96,19 @@
 					return;
 				}
 				
-				let day = $("#day").val();
+				let day = $("#day").val().trim();
 				if (day == '') {
 					alert("숙박일수를 입력해주세요");
 					return;
 				}
 				
-				let headcount = $("#headcount").val();
+				let headcount = $("#headcount").val().trim();
 				if (headcount == '') {
 					alert("숙박인원을 입력해주세요");
 					return;
 				}
 				
-				let phoneNumber = $("#phoneNumber").val();
+				let phoneNumber = $("#phoneNumber").val().trim();
 				if (phoneNumber == '') {
 					alert("휴대폰 번호를 입력해주세요");
 					return;
@@ -121,11 +124,13 @@
 							 "phoneNumber":phoneNumber}
 				
 					, success:function(data) {
-						alert(data.result);
-						location.reload();
+						if (data.result == "성공") {
+							alert("예약 되었습니다.");
+							location.href = "/booking/booking_list_view"; // 목록화면으로 이동
+						}
 					}
 					, error:function(e) {
-						alert("실패 " + e);
+						alert("예약하는데 실패했습니다.");
 					}
 				})
 			})

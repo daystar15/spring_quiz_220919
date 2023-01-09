@@ -28,7 +28,8 @@ public class BookingBO {
 		return bookingDAO.deleteBookingList(id);
 	}
 	
-	public Booking getBookingList(String name, Date date, int day, int headcount, String phoneNumber, String state) {
-		return bookingDAO.getBookingList(name, date, day, headcount, state, phoneNumber);
+	// 메소드 이름 : getLatestBookingByNamePhoneNumber
+	public Booking getBookingList(String name, String phoneNumber) {
+		return bookingDAO.getBookingList(name, phoneNumber);
 	}
 }

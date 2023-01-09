@@ -91,25 +91,29 @@
   				alert("예약시 작성한 휴대폰번호를 입력해주세요.");
   				return;
   			}
+  			
+  			// ajax
   			$.ajax({
+  				// request
   				type: "post"
   				, url: "/booking/reservation_search"
   				, data: {"name":name, "phoneNumber":phoneNumber}
-  			
+  				
+  				// response
   				, success:function(data) {
-  	  				if (data.findOk == "성공") {
-	  	  				alert("이름 : " + name +
-  							"\n날짜 : " + data.date + 
-  							"\n일수 : " + data.day + 
-  							"\n인원 : " + data.headcount  + 
-  							"\n상태 : " + data.state
-  							);
-  	  				} else if (data.findOk == "재확인") {
+  	  				if (data.code == 1) { // 조회된 내역 있을 때
+  	  					let message = "이름 : " + data.booking.name + 
+  	  					"\n날짜 : " + data.date + 
+  	  					"\n일수 : " + data.booking.day + 
+						"\n인원 : " + data.booking.headcount  + 
+						"\n상태 : " + data.booking.state;
+	  	  				alert(message);
+  	  				} else { // 조회된 내역 없을 때 또는 에러 상황
   	  					alert("예약 내용이 없습니다.");
   	  				}
   				}
   				, error:function(e) {
-  					alert("실패 " + e);
+  					alert("조회에 실패했습니다.");
   				}
   			})
   		})

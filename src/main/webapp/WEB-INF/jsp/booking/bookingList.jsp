@@ -61,8 +61,22 @@
 		    				<td>${list.day}</td>
 		    				<td>${list.headcount}</td>
 		    				<td>${list.phoneNumber}</td>
-		    				<td class="text-success">${list.state}</td>
-		    				<td><button type="button" class="btn btn-danger delBtn" data-booking-id="${list.id}">삭제</button></td>
+		    				<td>
+		    					<c:choose>
+		    						<c:when test="${list.state eq '대기중'}">
+		    							<span class="text-info">${list.state}</span>
+		    						</c:when>
+		    						<c:when test="${list.state eq '확정'}">
+		    							<span class="text-success">${list.state}</span>
+		    						</c:when>
+		    						<c:when test="${list.state eq '취소'}">
+		    							<span class="text-danger">${list.state}</span>
+		    						</c:when>
+		    					</c:choose>
+		    				</td>
+		    				<td>
+		    					<button type="button" class="btn btn-danger delBtn" data-booking-id="${list.id}">삭제</button>
+		    				</td>
 		    			</tr>
 	    			</c:forEach>
 	    		</tbody>
@@ -76,22 +90,35 @@
 	</div>
 	
 	<script>
-		$(".delBtn").on("click", function() {
-			let id = $(this).data('booking-id');
-			// console.log(id);
-			
-			$.ajax({
-				type: "delete"
-				, url: "/booking/delete_booking_list"
-				, data: {"id":id}
-			
-				, success:function(data) {
-					window.location.reload(true);
-				}
-				, erroe:function(e) {
-					alert("실패 " + e);
-				}
-			});
+		$(document).ready(function() {
+			$(".delBtn").on("click", function() {
+				// data이름은 꼭 하이픈으로 짓기(대문자 넣으면 안됨)
+				let id = $(this).data('booking-id');
+				// console.log(id);
+				
+				$.ajax({
+					// request
+					type: "delete"
+					, url: "/booking/delete_booking_list"
+					, data: {"id":id} // "리퀘스트파라미터명":받아온변수(let으로 만든)
+					
+					// response
+					, success:function(data) {
+						// {"code":1, "result":"성공"}
+						// {"code":1500, "result":"실패", "error_message":삭제하는데 실패했습니다.}
+						// window.location.reload(true);
+						if (data.code == 1) {
+							// 새로고침
+							window.location.reload(true);
+						} else if (data.code == 500) {
+							alert(daga.error_message);
+						}
+					}
+					, erroe:function(e) {
+						alert("삭제하는데 통신이 실패했습니다. " + e);
+					}
+				});
+			})
 		})
 	</script>
 </body>
